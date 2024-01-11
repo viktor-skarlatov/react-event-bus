@@ -44,7 +44,7 @@ export function App() {
 }
 ```
 
-### 2. Define events contract
+### 2. Events contract
 ```
 export interface PizzaEvents {
   "pizza-ordered": (pizzaName: string) => void;
