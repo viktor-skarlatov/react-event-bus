@@ -12,6 +12,9 @@ export default merge(baseConfig, [
       dir: 'dist',
       format: 'esm',
     },
+    external: [
+      'react'
+    ],
     plugins: [
       nodeResolve(),
     ],
