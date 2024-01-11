@@ -1,24 +1,36 @@
 {
   "name": "@skarlatov/react-event-bus",
-  "version": "0.0.9",
+  "version": "0.0.12",
   "description": "A simple implementation of the event bus pattern for React and React Native apps.",
   "main": "index.js",
-  "author": "Viktor Skarlatov",
+  "author": {
+    "name": "Viktor Skarlatov",
+    "email": "viktor.skarlatov@gmail.com",
+    "url": "https://github.com/viktor-skarlatov"
+  },
   "scripts": {
     "build": "rimraf dist && tsc && rollup -c rollup.config.mjs && cp ./package.json ./dist/package.json && cp ./README.md ./dist/README.md"
   },
   "files": [
     "index.js",
     "types.d.ts",
-    "README.md"
+    "README.md",
+    "assets"
   ],
   "types": "types.d.ts",
-  "contributors": [
-    {
-      "name": "Viktor Skarlatov"
-    }
-  ],
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/viktor-skarlatov/react-event-bus.git"
+  },
+  "keywords": [
+    "Events",
+    "Event bus",
+    "React",
+    "Typescript"
+  ],
+  "homepage": "https://github.com/viktor-skarlatov/react-event-bus",
+  "bugs": "https://github.com/viktor-skarlatov/react-event-bus/issues",
   "dependencies": {
     "react": "18.2.0"
   },

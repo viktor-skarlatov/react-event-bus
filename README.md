@@ -1,10 +1,10 @@
-# React Event Bus :zap: <img src="assets/icons/react.svg" alt="drawing" style="margin-bottom: -6px;" width="27" height="27"/>
+# React Event Bus :zap: <img src="https://raw.githubusercontent.com/viktor-skarlatov/react-event-bus/main/assets/icons/react.svg" alt="drawing" style="margin-bottom: -6px;" width="27" height="27"/>
 
 ## Description
 This package is an implementation of the [event](https://en.wikipedia.org/wiki/Event-driven_architecture) pattern. It allows direct, decoupled communication between entities (components, stores, actions etc.) in [React](https://react.dev) or [React Native](https://reactnative.dev) applications.
 
 ## Motivation
-Using events makes it easier for components to react to changes without indirectly using central state or props with *useEffect*. This is a very common source of performance issues and other bugs in React apps.
+Using events makes it easier for components to react to changes without indirectly using central state or props with [*useEffect*](https://react.dev/reference/react/useEffect). This is a very common source of performance issues and other bugs in React apps.
 
 ## Drawbacks
 Relying too heavily on events for state management can result in code that is hard to follow especially in pure Javascript projects. Also beware of *event storms* (unintended cascade of events or infinite event loops).
