@@ -21,7 +21,7 @@ Using **yarn**
 yarn add @skarlatov/react-event-bus
 ```
 
-## Basic usage
+## Basic usage :pizza:
 
     
 ### 1. Context setup
