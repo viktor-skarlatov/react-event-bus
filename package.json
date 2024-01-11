@@ -1,16 +1,16 @@
 {
   "name": "@skarlatov/react-event-bus",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "description": "A simple implementation of the event bus pattern for React and React Native apps.",
   "main": "index.js",
   "author": "Viktor Skarlatov",
   "scripts": {
-    "build": "rimraf dist && tsc && rollup -c rollup.config.mjs && cp ./package.json ./dist/package.json",
-    "publish": "cd ./dist && npm publish --access public & cd .."
+    "build": "rimraf dist && tsc && rollup -c rollup.config.mjs && cp ./package.json ./dist/package.json && cp ./README.md ./dist/README.md"
   },
   "files": [
     "index.js",
-    "types.d.ts"
+    "types.d.ts",
+    "README.md"
   ],
   "types": "types.d.ts",
   "contributors": [
