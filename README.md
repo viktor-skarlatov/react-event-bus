@@ -93,10 +93,6 @@ export function PizzeriaKitchen() {
 
   useEventBus<PizzaEvents>(eventSubscriptions);
 
-  const onOrderPizza = useCallback(() => {
-    raiseEvent("pizza-ordered", "New York");
-  }, [raiseEvent]);
-
   return (
     <div>
       Pizzeria Kitchen
