@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "noEmitOnError": true,
+    "lib": ["es6"],
+    "strict": true,
+    "outDir": "js",
+    "rootDir": "./",
+    "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true,
+    "declaration": true,
+    "jsx": "react",
+    "baseUrl": "./src"
+  },
+  "include": ["./src/**/*.ts"]
+}

@@ -1,0 +1,33 @@
+{
+  "name": "@skarlatov/react-event-bus",
+  "version": "0.0.1",
+  "description": "A simple implementation of the event bus pattern for React and React Native apps.",
+  "main": "index.js",
+  "author": "Viktor Skarlatov",
+  "scripts": {
+    "build": "rimraf dist && tsc && rollup -c rollup.config.mjs && cp ./package.json ./dist/package.json"
+  },
+  "files": [
+    "index.js",
+    "types.d.ts"
+  ],
+  "types": "types.d.ts",
+  "contributors": [
+    {
+      "name": "Viktor Skarlatov"
+    }
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "react": "18.2.0"
+  },
+  "devDependencies": {
+    "@open-wc/building-rollup": "^3.0.2",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "deepmerge": "4.3.1",
+    "rimraf": "5.0.5",
+    "rollup": "4.9.4",
+    "rollup-plugin-dts": "^6.1.0",
+    "typescript": "5.3.3"
+  }
+}
