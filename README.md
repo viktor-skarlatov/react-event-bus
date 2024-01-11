@@ -58,7 +58,7 @@ import { useEventBus } from "@skarlatov/react-event-bus";
 import { PizzaEvents } from "./contracts";
 
 export function PizzeriaWaiter() {
-  const { raiseEvent } = useEventBus<PizzaEvents>()
+  const { raiseEvent } = useEventBus<PizzaEvents>();
 
   const onOrderPizza = useCallback(() => {
     raiseEvent("pizza-ordered", "New York");
