@@ -1,4 +1,4 @@
-# React Event Bus :zap:
+# React Event Bus :zap: <img src="assets/icons/react.svg" alt="drawing" style="margin-bottom: -4px;" width="24" height="24"/>
 
 ## Description
 This package is an implementation of the [event](https://en.wikipedia.org/wiki/Event-driven_architecture) pattern. It allows direct, decoupled communication between entities (components, stores, actions etc.) in [React](https://react.dev) or [React Native](https://reactnative.dev) applications.
