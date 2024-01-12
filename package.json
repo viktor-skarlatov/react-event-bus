@@ -1,7 +1,7 @@
 {
   "name": "@skarlatov/react-event-bus",
-  "version": "0.0.13",
-  "description": "A simple implementation of the event bus pattern for React and React Native apps.",
+  "version": "0.0.14",
+  "description": "A simple implementation of the event pattern for React and React Native apps.",
   "main": "index.js",
   "author": {
     "name": "Viktor Skarlatov",
