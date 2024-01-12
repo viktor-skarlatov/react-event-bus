@@ -75,7 +75,7 @@ export function PizzeriaWaiter() {
 
 ### 4. Event consumer
 ```
-import React, { useCallback } from "react";
+import React, { useCallback, useMemo } from "react";
 import { useEventBus } from "@skarlatov/react-event-bus";
 import { PizzaEvents } from "./contracts";
 
