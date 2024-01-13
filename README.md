@@ -91,7 +91,7 @@ export function PizzeriaKitchen() {
     "pizza-ordered": onPizzaOrdered,
   }), [onPizzaOrdered]);
 
-  useEventBus<PizzaEvents>(eventSubscriptions);
+  useEventBus<PizzaEvents>({ eventSubscriptions });
 
   return (
     <div>

@@ -2,7 +2,12 @@ import { useCallback, useContext, useEffect } from "react";
 import { EventSubscription, OptionalParameters, SubscriptionData } from "../contracts";
 import { EventBusContext } from "../contexts";
 
-export function useEventBus<S>(subscriptions?: EventSubscription<S>) {
+interface Props<S> {
+  eventSubscriptions?: EventSubscription<S>
+}
+
+export function useEventBus<S>(props?: Props<S>) {
+  const subscriptions = props?.eventSubscriptions;
   const context = useContext(EventBusContext);
 
   useEffect(() => {
