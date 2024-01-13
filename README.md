@@ -12,12 +12,12 @@ Relying too heavily on events for state management can result in code that is ha
 ## Installation
 
 Using **npm**
-```
+```bash
 npm i @skarlatov/react-event-bus
 ```
 
 Using **yarn**
-```
+```bash
 yarn add @skarlatov/react-event-bus
 ```
 
@@ -25,7 +25,7 @@ yarn add @skarlatov/react-event-bus
 
     
 ### 1. Context setup
-```
+```js
 import { uniqueId } from "lodash";
 import { EventBusProvider } from "@skarlatov/react-event-bus";
 
@@ -45,14 +45,14 @@ export function App() {
 ```
 
 ### 2. Events contract
-```
+```js
 export interface PizzaEvents {
   "pizza-ordered": (pizzaName: string) => void;
 }
 ```
 
 ### 3. Event emitter
-```
+```js
 import React, { useCallback } from "react";
 import { useEventBus } from "@skarlatov/react-event-bus";
 import { PizzaEvents } from "./contracts";
@@ -74,7 +74,7 @@ export function PizzeriaWaiter() {
 ```
 
 ### 4. Event consumer
-```
+```js
 import React, { useCallback, useMemo } from "react";
 import { useEventBus } from "@skarlatov/react-event-bus";
 import { PizzaEvents } from "./contracts";
@@ -104,7 +104,7 @@ export function PizzeriaKitchen() {
 ## Usage outside React components
 The event bus can be accessed outside React components by using the *setGlobalEventBusRef* utility function and the *contextCreated* prop of the provider.
 
-```
+```js
 import { uniqueId } from "lodash";
 import { EventBusProvider, setGlobalEventBusRef } from "@skarlatov/react-event-bus";
 
@@ -123,7 +123,7 @@ The global reference can be used to raise events from anywhere including stores 
 
 For the sake of the example we update our PizzaEvents contract with a new 'pizza-ready' event.
 
-```
+```js
 export interface PizzaEvents {
   "pizza-ordered": (pizzaName: string) => void;
   // The new event
@@ -133,7 +133,7 @@ export interface PizzaEvents {
 
 Now we can raise the event **without** the *useEventBus* hook like so:
 
-```
+```js
 import { raiseEvent } from "@skarlatov/react-event-bus";
 import { PizzaEvents } from "./contracts";
 
