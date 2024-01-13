@@ -100,3 +100,53 @@ export function PizzeriaKitchen() {
   );
 }
 ```
+
+## Usage outside React components
+The event bus can be accessed outside React components by using the *setGlobalEventBusRef* utility function and the *contextCreated* prop of the provider.
+
+```
+import { uniqueId } from "lodash";
+import { EventBusProvider, setGlobalEventBusRef } from "@skarlatov/react-event-bus";
+
+export function App() {
+  return (
+    <EventBusProvider 
+      contextCreated={setGlobalEventBusRef}
+      createUniqueId={uniqueId}>
+      {/* The rest of your root app code is here */}
+    </EventBusProvider>
+  );
+}
+```
+
+The global reference can be used to raise events from anywhere including stores and actions with the *raiseEvent* utility function. This function is safe in the sense that if the global ref is not initialized yet your app will not crash. Just the event won't be raised and a warning will be printed in the console.
+
+For the sake of the example we update our PizzaEvents contract with a new 'pizza-ready' event.
+
+```
+export interface PizzaEvents {
+  "pizza-ordered": (pizzaName: string) => void;
+  // The new event
+  "pizza-ready": (pizzaName: string) => void;
+}
+```
+
+Now we can raise the event **without** the *useEventBus* hook like so:
+
+```
+import { raiseEvent } from "@skarlatov/react-event-bus";
+import { PizzaEvents } from "./contracts";
+
+export function PizzeriaKitchen() {
+  const onPizzaReady = useCallback((name: string) => {
+    raiseEvent<PizzaEvents>("pizza-ready", name);
+  }, []);
+
+  return (
+    <div>
+      Pizzeria Kitchen
+      <button onClick={onPizzaReady}>Pizza ready!</button>
+    </div>
+  );
+}
+```
