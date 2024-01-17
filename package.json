@@ -14,8 +14,7 @@
   "files": [
     "index.js",
     "types.d.ts",
-    "README.md",
-    "assets"
+    "README.md"
   ],
   "types": "types.d.ts",
   "license": "MIT",
