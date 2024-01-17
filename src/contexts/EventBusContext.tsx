@@ -8,14 +8,14 @@ import React, {
 
 import {
   EventHandler,
+  EventKey,
   EventTable,
-  SubscriptionId,
 } from "../contracts";
 
 export interface EventBusState {
-  subscribe: (event: string, handler: EventHandler) => SubscriptionId;
-  unsubscribe: (event: string, id: SubscriptionId) => void;
-  raiseEvent: (event: string, ...args: any) => void;
+  subscribe: (event: EventKey, handler: EventHandler) => string;
+  unsubscribe: (event: EventKey, id: string) => void;
+  raiseEvent: (event: EventKey, ...args: any) => void;
 }
 
 export const EventBusContext = createContext<EventBusState | undefined>(

@@ -1,5 +1,5 @@
 import { EventBusState } from "../contexts";
-import { EventSubscription, OptionalParameters } from "../contracts";
+import { EventSubscription } from "../contracts";
 
 let globalEventBusContext: EventBusState;
 
@@ -7,15 +7,20 @@ export function setGlobalEventBusRef(context: EventBusState) {
   globalEventBusContext = context;
 }
 
-export function raiseEvent<S extends EventSubscription<S>>(
-  eventName: keyof S,
-  ...args: OptionalParameters<EventSubscription<S>[keyof S]>
-) {
-  if (globalEventBusContext === undefined) {
-    console.warn(`Attempting to raise the ${String(eventName)} event before the global event bus ref is initialized.`);
-    return;
-  }
+export function globalEventBus<S extends EventSubscription<S>>() {
+  const raiseEvent = <N extends keyof S>(
+    eventName: N,
+    ...args: Parameters<(EventSubscription<S>[N])>
+  ) => {
+    if (globalEventBusContext === undefined) {
+      console.warn(`Attempting to raise the ${String(eventName)} event before the global event bus ref is initialized.`);
+      return;
+    }
+  
+    globalEventBusContext.raiseEvent(eventName, ...args);
+  };
 
-  // @ts-ignore
-  globalEventBusContext.raiseEvent(eventName, ...(args ?? []));
+  return {
+    raiseEvent,
+  };
 }
