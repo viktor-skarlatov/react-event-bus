@@ -15,7 +15,7 @@ import {
 export interface EventBusState {
   subscribe: (event: EventKey, handler: EventHandler) => string;
   unsubscribe: (event: EventKey, id: string) => void;
-  raiseEvent: (event: EventKey, ...args: any) => void;
+  raiseEvent: (event: EventKey, ...args: any[]) => void;
 }
 
 export const EventBusContext = createContext<EventBusState | undefined>(
