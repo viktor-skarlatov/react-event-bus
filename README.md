@@ -47,7 +47,7 @@ export function App() {
 ### 2. Events contract
 ```js
 export interface PizzaEvents {
-  "pizza-ordered": (pizzaName: string) => void;
+  "pizza-ordered"?: (pizzaName: string) => void;
 }
 ```
 
@@ -125,9 +125,9 @@ For the sake of the example we update our PizzaEvents contract with a new 'pizza
 
 ```js
 export interface PizzaEvents {
-  "pizza-ordered": (pizzaName: string) => void;
+  "pizza-ordered"?: (pizzaName: string) => void;
   // The new event
-  "pizza-ready": (pizzaName: string) => void;
+  "pizza-ready"?: (pizzaName: string) => void;
 }
 ```
 

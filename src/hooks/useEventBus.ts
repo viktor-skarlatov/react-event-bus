@@ -1,5 +1,5 @@
 import { useCallback, useContext, useEffect } from "react";
-import { EventSubscription, SubscriptionData } from "../contracts";
+import { EventSubscription, OptionalParameters, SubscriptionData } from "../contracts";
 import { EventBusContext } from "../contexts";
 
 interface Props<S> {
@@ -43,7 +43,7 @@ export function useEventBus<S>(props?: Props<S>) {
   const raiseEvent = useCallback(
     <N extends keyof S>(
       eventName: N,
-      ...args: Parameters<EventSubscription<S>[N]>
+      ...args: OptionalParameters<EventSubscription<S>[N]>
     ) => {
       context?.raiseEvent(eventName, ...args);
     },
