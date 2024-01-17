@@ -134,6 +134,7 @@ export interface PizzaEvents {
 Now we can raise the event **without** the *useEventBus* hook like so:
 
 ```js
+import { useCallback } from 'react';
 import { globalEventBus } from "@skarlatov/react-event-bus";
 import { PizzaEvents } from "./contracts";
 
@@ -147,7 +148,7 @@ export function PizzeriaKitchen() {
   return (
     <div>
       Pizzeria Kitchen
-      <button onClick={onPizzaReady}>Pizza ready!</button>
+      <button onClick={() => onPizzaReady("New York")}>Pizza ready!</button>
     </div>
   );
 }
