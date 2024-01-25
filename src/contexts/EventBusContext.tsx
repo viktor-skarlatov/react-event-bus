@@ -16,6 +16,7 @@ export interface EventBusState {
   subscribe: (event: EventKey, handler: EventHandler) => string;
   unsubscribe: (event: EventKey, id: string) => void;
   raiseEvent: (event: EventKey, ...args: any[]) => void;
+  subscriptions: EventTable;
 }
 
 export const EventBusContext = createContext<EventBusState | undefined>(
@@ -81,10 +82,11 @@ export const EventBusProvider = ({
       raiseEvent,
       subscribe,
       unsubscribe,
+      subscriptions,
     };
     contextCreated?.(contextObject);
     return contextObject;
-  }, [raiseEvent, subscribe, unsubscribe, contextCreated]);
+  }, [subscriptions, raiseEvent, subscribe, unsubscribe, contextCreated]);
 
   return (
     <EventBusContext.Provider value={context}>
