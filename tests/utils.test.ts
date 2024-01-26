@@ -1,9 +1,7 @@
 import { EventBusState } from '../src/contexts';
 import { createWarningMessage, globalEventBus, setGlobalEventBusRef } from '../src/utils';
-
-interface TestEvents {
-  "test-event": (val: number) => void;
-}
+import { eventName } from './constants';
+import { TestEvents } from './types';
 
 const warnMock = jest.spyOn(global.console, 'warn');
 
@@ -12,8 +10,6 @@ const { raiseEvent } = globalEventBus<TestEvents>();
 const testEventBus: EventBusState = {
   raiseEvent: jest.fn(),
 } as any;
-
-const eventName = "test-event";
 
 describe("utils", () => {
   test("raiseEvent before it is initialized", () => {

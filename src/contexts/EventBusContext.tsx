@@ -23,7 +23,7 @@ export const EventBusContext = createContext<EventBusState | undefined>(
   undefined,
 );
 
-interface Props {
+export interface EventBusProviderProps {
   contextCreated?: (context: EventBusState) => void;
   createUniqueId: () => string;
 }
@@ -32,7 +32,7 @@ export const EventBusProvider = ({
   children,
   createUniqueId,
   contextCreated,
-}: PropsWithChildren<Props>) => {
+}: PropsWithChildren<EventBusProviderProps>) => {
   const [subscriptions] = useState<EventTable>({});
 
   const subscribe: EventBusState["subscribe"] = useCallback(
@@ -59,6 +59,10 @@ export const EventBusProvider = ({
       }
 
       delete subscribers[id];
+
+      if (Object.keys(subscribers).length === 0) {
+        delete subscriptions[eventName];
+      }
     },
     [subscriptions],
   );
