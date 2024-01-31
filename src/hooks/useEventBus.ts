@@ -1,9 +1,14 @@
-import { useCallback, useContext, useEffect } from "react";
-import { EventSubscription, OptionalParameters, SubscriptionData } from "../contracts";
-import { EventBusContext } from "../contexts";
+import { useCallback, useContext, useEffect } from 'react';
+
+import { EventBusContext } from '../contexts';
+import {
+  EventSubscription,
+  OptionalParameters,
+  SubscriptionData,
+} from '../contracts';
 
 interface Props<S> {
-  eventSubscriptions?: EventSubscription<S>
+  eventSubscriptions?: EventSubscription<S>;
 }
 
 export function useEventBus<S>(props?: Props<S>) {
@@ -15,10 +20,10 @@ export function useEventBus<S>(props?: Props<S>) {
       return;
     }
 
-    const {subscribe, unsubscribe} = context;
+    const { subscribe, unsubscribe } = context;
 
     const subscriptionsData: SubscriptionData[] = [];
-    Object.keys(subscriptions).forEach(eventName => {
+    Object.keys(subscriptions).forEach((eventName) => {
       const key = eventName as keyof S;
       const eventHandler = subscriptions[key];
       if (!eventHandler) {
@@ -34,7 +39,7 @@ export function useEventBus<S>(props?: Props<S>) {
     });
 
     return () => {
-      subscriptionsData.forEach(({id, eventName}) =>
+      subscriptionsData.forEach(({ id, eventName }) =>
         unsubscribe(eventName, id),
       );
     };

@@ -1,13 +1,19 @@
-import React from 'react';
 import '@testing-library/jest-dom';
-import { render } from './TestApp';
-import { screen, fireEvent } from '@testing-library/react';
-import { globalEventBusContext, globalEventBus, setGlobalEventBusRef } from '../src/utils';
-import { EventBusProvider, EventBusProviderProps } from '../src/contexts';
+
+import { fireEvent, screen } from '@testing-library/react';
 import { uniqueId } from 'lodash';
-import { TestEvents, TestEvents2 } from './types';
-import { eventName, eventName2 } from './constants';
+import React from 'react';
+
+import { EventBusProvider, EventBusProviderProps } from '../src/contexts';
+import {
+  globalEventBus,
+  globalEventBusContext,
+  setGlobalEventBusRef,
+} from '../src/utils';
 import { Component, Consumer, Producer } from './components';
+import { eventName, eventName2 } from './constants';
+import { render } from './TestApp';
+import { TestEvents, TestEvents2 } from './types';
 
 const defaultContextProps: EventBusProviderProps = {
   contextCreated: setGlobalEventBusRef,
@@ -25,26 +31,35 @@ const subs2: TestEvents2 = {
 const subId = 'test-id';
 const createUniqueIdMock = jest.fn().mockReturnValue(subId);
 
-describe("EventBusContext", () => {
-  test("contextCreated", () => {
-    render(<EventBusProvider contextCreated={setGlobalEventBusRef} createUniqueId={uniqueId} />);
+describe('EventBusContext', () => {
+  test('contextCreated', () => {
+    render(
+      <EventBusProvider
+        contextCreated={setGlobalEventBusRef}
+        createUniqueId={uniqueId}
+      />,
+    );
     const eventBus = globalEventBus();
     expect(eventBus).toBeDefined();
   });
 
-  test("createUniqueId", () => {
+  test('createUniqueId', () => {
     const contextProps: EventBusProviderProps = {
       ...defaultContextProps,
       createUniqueId: createUniqueIdMock,
     };
 
     render(<Component eventSubscriptions={subs1} />, { contextProps });
-    
-    expect(Object.keys(globalEventBusContext.subscriptions[eventName]).length).toBe(1);
-    expect(globalEventBusContext.subscriptions[eventName][subId]).toBe(subs1['test-event']);
+
+    expect(
+      Object.keys(globalEventBusContext.subscriptions[eventName]).length,
+    ).toBe(1);
+    expect(globalEventBusContext.subscriptions[eventName][subId]).toBe(
+      subs1['test-event'],
+    );
   });
 
-  test("mount and unmount", () => {
+  test('mount and unmount', () => {
     const { unmount } = render(
       <>
         <Component eventSubscriptions={subs1} />
@@ -54,12 +69,22 @@ describe("EventBusContext", () => {
       </>,
       { contextProps: defaultContextProps },
     );
-    
-    expect(Object.keys(globalEventBusContext.subscriptions[eventName]).length).toBe(2);
-    expect(Object.keys(globalEventBusContext.subscriptions[eventName2]).length).toBe(1);
-    expect(globalEventBusContext.subscriptions[eventName][1]).toBe(subs1['test-event']);
-    expect(globalEventBusContext.subscriptions[eventName][2]).toBe(subs1['test-event']);
-    expect(globalEventBusContext.subscriptions[eventName2][3]).toBe(subs2['test-event-2']);
+
+    expect(
+      Object.keys(globalEventBusContext.subscriptions[eventName]).length,
+    ).toBe(2);
+    expect(
+      Object.keys(globalEventBusContext.subscriptions[eventName2]).length,
+    ).toBe(1);
+    expect(globalEventBusContext.subscriptions[eventName][1]).toBe(
+      subs1['test-event'],
+    );
+    expect(globalEventBusContext.subscriptions[eventName][2]).toBe(
+      subs1['test-event'],
+    );
+    expect(globalEventBusContext.subscriptions[eventName2][3]).toBe(
+      subs2['test-event-2'],
+    );
 
     unmount();
 
@@ -67,7 +92,7 @@ describe("EventBusContext", () => {
     expect(globalEventBusContext.subscriptions[eventName2]).toBeUndefined();
   });
 
-  test("raise event", () => {
+  test('raise event', () => {
     const eventValue = 5;
     render(
       <>
@@ -77,8 +102,10 @@ describe("EventBusContext", () => {
       { contextProps: defaultContextProps },
     );
 
-    const loginButton = screen.getByTestId("producer-button");
+    const loginButton = screen.getByTestId('producer-button');
     fireEvent.click(loginButton);
-    expect(screen.getByTestId("consumer-text")).toHaveTextContent(`event fired - ${eventValue}`);
+    expect(screen.getByTestId('consumer-text')).toHaveTextContent(
+      `event fired - ${eventValue}`,
+    );
   });
 });

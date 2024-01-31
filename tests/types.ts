@@ -1,7 +1,7 @@
 export interface TestEvents {
-  "test-event": (val: number) => void;
+  'test-event': (val: number) => void;
 }
 
 export interface TestEvents2 {
-  "test-event-2": () => void;
+  'test-event-2': () => void;
 }

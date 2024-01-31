@@ -1,16 +1,12 @@
 import React, {
-  PropsWithChildren,
   createContext,
+  PropsWithChildren,
   useCallback,
   useMemo,
   useState,
-} from "react";
+} from 'react';
 
-import {
-  EventHandler,
-  EventKey,
-  EventTable,
-} from "../contracts";
+import { EventHandler, EventKey, EventTable } from '../contracts';
 
 export interface EventBusState {
   subscribe: (event: EventKey, handler: EventHandler) => string;
@@ -35,7 +31,7 @@ export const EventBusProvider = ({
 }: PropsWithChildren<EventBusProviderProps>) => {
   const [subscriptions] = useState<EventTable>({});
 
-  const subscribe: EventBusState["subscribe"] = useCallback(
+  const subscribe: EventBusState['subscribe'] = useCallback(
     (name, handler) => {
       let subscribers = subscriptions[name];
       if (!subscribers) {
@@ -51,7 +47,7 @@ export const EventBusProvider = ({
     [subscriptions, createUniqueId],
   );
 
-  const unsubscribe: EventBusState["unsubscribe"] = useCallback(
+  const unsubscribe: EventBusState['unsubscribe'] = useCallback(
     (eventName, id) => {
       const subscribers = subscriptions[eventName];
       if (!subscribers) {
@@ -67,14 +63,14 @@ export const EventBusProvider = ({
     [subscriptions],
   );
 
-  const raiseEvent: EventBusState["raiseEvent"] = useCallback(
+  const raiseEvent: EventBusState['raiseEvent'] = useCallback(
     (eventName, args) => {
       const eventSubscribers = subscriptions[eventName];
       if (!eventSubscribers) {
         return;
       }
 
-      Object.values(eventSubscribers).forEach(eventHandler => {
+      Object.values(eventSubscribers).forEach((eventHandler) => {
         eventHandler?.(args);
       });
     },
