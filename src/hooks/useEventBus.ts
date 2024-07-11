@@ -1,4 +1,4 @@
-import { useCallback, useContext, useEffect } from 'react';
+import { useCallback, useContext, useEffect, useRef } from 'react';
 
 import { EventBusContext } from '../contexts';
 import {
@@ -9,18 +9,18 @@ import {
 
 interface Props<S> {
   eventSubscriptions?: EventSubscription<S>;
+  autoSubscribe?: boolean;
 }
 
 export function useEventBus<S>(props?: Props<S>) {
   const subscriptions = props?.eventSubscriptions;
   const context = useContext(EventBusContext);
+  const currentSubsRef = useRef<SubscriptionData[]>();
 
-  useEffect(() => {
+  const subscribe = useCallback(() => {
     if (!context || !subscriptions) {
       return;
     }
-
-    const { subscribe, unsubscribe } = context;
 
     const subscriptionsData: SubscriptionData[] = [];
     Object.keys(subscriptions).forEach((eventName) => {
@@ -30,7 +30,7 @@ export function useEventBus<S>(props?: Props<S>) {
         return;
       }
 
-      const id = subscribe(eventName, eventHandler);
+      const id = context.subscribe(eventName, eventHandler);
 
       subscriptionsData.push({
         eventName,
@@ -38,12 +38,32 @@ export function useEventBus<S>(props?: Props<S>) {
       });
     });
 
-    return () => {
-      subscriptionsData.forEach(({ id, eventName }) =>
-        unsubscribe(eventName, id),
+    currentSubsRef.current = subscriptionsData;
+
+    return subscriptionsData;
+  }, [context, subscriptions]);
+
+  const unsubscribeInternal = useCallback(
+    (subsData: SubscriptionData[] | undefined) => {
+      subsData?.forEach(({ id, eventName }) =>
+        context?.unsubscribe(eventName, id),
       );
+
+      currentSubsRef.current = undefined;
+    },
+    [context],
+  );
+
+  useEffect(() => {
+    let subsData: SubscriptionData[] | undefined;
+    if (props?.autoSubscribe !== false) {
+      subsData = subscribe();
+    }
+
+    return () => {
+      unsubscribeInternal(subsData);
     };
-  }, [subscriptions, context]);
+  }, [props?.autoSubscribe, subscribe, unsubscribeInternal]);
 
   const raiseEvent = useCallback(
     <N extends keyof S>(
@@ -55,7 +75,13 @@ export function useEventBus<S>(props?: Props<S>) {
     [context],
   );
 
+  const unsubscribe = useCallback(() => {
+    unsubscribeInternal(currentSubsRef.current);
+  }, [unsubscribeInternal]);
+
   return {
     raiseEvent,
+    subscribe,
+    unsubscribe,
   };
 }
