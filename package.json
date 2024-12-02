@@ -1,6 +1,6 @@
 {
   "name": "@skarlatov/react-event-bus",
-  "version": "2.1.1",
+  "version": "3.0.0",
   "description": "A simple implementation of the event pattern for React and React Native apps.",
   "main": "index.js",
   "author": {
@@ -33,17 +33,16 @@
   "homepage": "https://github.com/viktor-skarlatov/react-event-bus",
   "bugs": "https://github.com/viktor-skarlatov/react-event-bus/issues",
   "dependencies": {
-    "react": "18.2.0"
+    "react": "18.3.1"
   },
   "devDependencies": {
     "@open-wc/building-rollup": "3.0.2",
-    "@rollup/plugin-commonjs": "25.0.7",
     "@rollup/plugin-node-resolve": "15.2.3",
     "@testing-library/jest-dom": "6.3.0",
     "@testing-library/react": "14.1.2",
     "@types/jest": "29.5.11",
     "@types/lodash": "4.14.202",
-    "@types/react": "18.2.47",
+    "@types/react": "18.3.12",
     "deepmerge": "4.3.1",
     "eslint": "8.53.0",
     "eslint-config-airbnb": "19.0.4",

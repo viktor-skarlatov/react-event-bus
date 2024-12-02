@@ -1,10 +1,10 @@
 {
   "compilerOptions": {
-    "target": "ES2015",
-    "module": "CommonJS",
+    "target": "esnext",
+    "module": "esnext",
     "moduleResolution": "Node",
     "noEmitOnError": true,
-    "lib": ["ES2015"],
+    "lib": ["ESNext"],
     "strict": true,
     "outDir": "js",
     "rootDir": "./",
